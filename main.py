@@ -26,36 +26,36 @@ def main():
 
     # Создаем базу данных и заполняем ее данными
     create_database('hh', params)
-    save_data_to_db(companies_data, vacancies, 'hh', params)
+    save_data_to_db(companies_data, vacancies, params)
 
     # Создаем объект DBManager для работы с базой данных
     db_manager = DBManager("hh", params)
 
     # Выводим меню
-    print(f"Выберите запрос: \n"
-          f"1 - Список всех компаний и количество вакансий у каждой компании\n"
-          f"2 - Cписок всех вакансий с указанием названия компании, названия вакансии и зарплаты и ссылки на вакансию\n"
-          f"3 - Средняя зарплата по вакансиям\n"
-          f"4 - Список всех вакансий, у которых зарплата выше средней по всем вакансиям\n"
-          f"5 - Список всех вакансий, в названии которых содержатся запрашиваемое слово\n"
-          f"6 - Получить название компании по ее ID\n")
-    user_answer = input("Введите номер запроса\n")
+    print(f"Выберите запрос: "
+          f"1 - Список всех компаний и количество вакансий у каждой компании"
+          f"2 - Cписок всех вакансий с указанием названия компании, названия вакансии и зарплаты и ссылки на вакансию"
+          f"3 - Средняя зарплата по вакансиям"
+          f"4 - Список всех вакансий, у которых зарплата выше средней по всем вакансиям"
+          f"5 - Список всех вакансий, в названии которых содержатся запрашиваемое слово"
+          f"6 - Получить название компании по ее ID")
+    user_answer = input("Введите номер запроса")
 
     # Обрабатываем запросы
     if user_answer == "1":
         companies_and_vacancies_count = db_manager.get_companies_and_vacancies_count()
-        print(f"Список всех компаний и количество вакансий у каждой компании: {companies_and_vacancies_count}\n")
+        print(f"Список всех компаний и количество вакансий у каждой компании: {companies_and_vacancies_count}")
     elif user_answer == "2":
         all_vacancies = db_manager.get_all_vacancies()
         print(
-            f"Cписок всех вакансий с указанием названия компании, названия вакансии и зарплаты и ссылки на вакансию: {all_vacancies}\n")
+            f"Cписок всех вакансий с указанием названия компании, названия вакансии и зарплаты и ссылки на вакансию: {all_vacancies}")
     elif user_answer == "3":
         avg_salary = db_manager.get_avg_salary()
-        print(f"Средняя зарплата по вакансиям: {avg_salary}\n")
+        print(f"Средняя зарплата по вакансиям: {avg_salary}")
     elif user_answer == "4":
         vacancies_with_higher_salary = db_manager.get_vacancies_with_higher_salary()
         print(
-            f"Список всех вакансий, у которых зарплата выше средней по всем вакансиям: {vacancies_with_higher_salary}\n")
+            f"Список всех вакансий, у которых зарплата выше средней по всем вакансиям: {vacancies_with_higher_salary}")
     elif user_answer == "5":
         user_input = input(f'Введите слово: ')
         vacancies_with_keyword = db_manager.get_vacancies_with_keyword(user_input)

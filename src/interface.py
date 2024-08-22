@@ -1,7 +1,7 @@
 import psycopg2
 
 from src.config import config  # Импортируем config из этой директории
-from src.create_db import create_data_base, save_data_to_db  # Импортируем create_data_base и save_data_to_db
+from src.create_db import create_database, save_data_to_db  # Импортируем create_data_base и save_data_to_db
 from src.db_manager import DBManager  # Импортируем DBManager
 from src.hh_api import get_vacancies, get_companies, get_vacancy_list  # Импортируем функции из hh_api
 
@@ -9,7 +9,7 @@ params = config()  # Получаем параметры подключения 
 data = get_vacancies(get_companies())  # Получаем список вакансий
 vacancies = get_vacancy_list(data)  # Преобразуем список вакансий в нужный формат
 
-create_data_base("top_vacancies", params)  # Создаем базу данных "top_vacancies"
+create_database("top_vacancies", params)  # Создаем базу данных "top_vacancies"
 conn = psycopg2.connect(dbname="top_vacancies", **params)  # Подключаемся к базе данных
 save_data_to_db(vacancies, "top_vacancies", params)  # Сохраняем данные в базу данных
 
